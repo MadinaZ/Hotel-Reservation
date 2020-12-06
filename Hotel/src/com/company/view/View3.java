@@ -1,10 +1,10 @@
 package com.company.view;
 
+import com.company.model.User;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 
 /**
  * View3 class displays login/signup page
@@ -15,6 +15,7 @@ public class View3 {
         private JLabel headDescription, loginDescription, signUpDescription;
         private JTextField loginUsername = new JTextField("Username", 10);
         private int hotelIndex;
+        User user = new User();
 
         /**
          * gets user information to login to the account
@@ -28,10 +29,10 @@ public class View3 {
         /**
          * Constructor for View3
          */
-        public View3(int hotelIndex) {
+        public View3(String hotelIndex) {
                 initialize();
                 frame.setVisible(true);
-                this.hotelIndex = hotelIndex;
+                this.hotelIndex = Integer.parseInt(hotelIndex);
         }
 
         public View3() {
@@ -74,8 +75,6 @@ public class View3 {
                                                               View4 view4 = new View4();
                                                               frame.setVisible(false);
                                                       }
-
-
                                               }
 
                 );
@@ -106,14 +105,7 @@ public class View3 {
                 signUpButton.addActionListener(e1 -> {
                         if ((getSignUpPasswordConfirmation().equalsIgnoreCase((getSignUpPassword())))) {
                                 try {
-                                        BufferedWriter bw = new BufferedWriter(new FileWriter("UserDatabase.txt"));
-                                        bw.write(getSignUpName());
-                                        bw.newLine();
-                                        bw.write(getSignUpUsername());
-                                        bw.newLine();
-                                        bw.write(getSignUpPassword());
-                                        bw.newLine();
-                                        bw.close();
+                                        user.saveUser(this);
                                         View3 view3 = new View3();
                                 } catch (Exception ex) {
                                         ex.printStackTrace();
@@ -121,9 +113,7 @@ public class View3 {
 
                         } else {
                                 JOptionPane.showMessageDialog(frame, "Passwords do not match!");
-                                // }
                         }
-
 
                 });
                 panel.add(signUpButton);
@@ -212,52 +202,6 @@ public class View3 {
          */
         public void setSignUpPasswordConfirmation(String password) {
                 signUpPasswordConfirmation.setText(password);
-        }
-
-        private void setAction() {
-
-                //loginButton.addActionListener(this);
-                //signUpButton.addActionListener(this);
-
-
-                //  if (e.getSource() == UserDatabase.txt) {
-
-                //check if username is exist
-                //if ((getLoginUsername()) == null) {
-                //     JOptionPane.showMessageDialog(frame, "this username does not exist");
-                //}
-                //else{ //check if the right password
-                //  if(UserDatabase.getUser_map().get(getLoginUsername()).doesPasswordEqual(getLoginPassword())){
-                // JOptionPane.showMessageDialog(frame,"login successfully");
-
-                // else{ // notify wrong password
-                //  JOptionPane.showMessageDialog(frame,"wrong password, please try again");
-                //  }
-                // }
-                //  }
-
-                //if(e.getSource() == signUpButton){
-
-                //check if username already exist
-
-
-                //else{// if then check if password and confirmation is the same
-                // if(signUpPassword.equals(signUpPasswordConfirmation)){
-                //User newUser = User(signUpName,signUpUsername,signUpPassword);
-                //UserDatabase.getUser_map().put(newUser.getUserName(),newUser);
-                //}
-
-                // else{
-                //JOptionPane.showMessageDialog(frame,"passwords does not match, try again");
-                // }
-
-                // }
-
-                // }
-
-                //  }
-
-                //  }
         }
 
 }

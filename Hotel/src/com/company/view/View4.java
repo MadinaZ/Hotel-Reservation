@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -67,10 +66,10 @@ public class View4 {
         accountNumber.setEditable(false);
         panel.add(accountNumber);
 
-        reservation = new JTextArea("Reservation");
-        reservation.setBounds(150, 150, 200, 20);
-        reservation.setEditable(false);
-        panel.add(reservation);
+//        reservation = new JTextArea("Reservation");
+//        reservation.setBounds(150, 150, 200, 20);
+//        reservation.setEditable(false);
+//        panel.add(reservation);
 
 
         // Right Section : Reserve & Cancel Buttons

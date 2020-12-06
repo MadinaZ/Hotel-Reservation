@@ -107,6 +107,6 @@ public class View2 {
 
     public int getHotelsFound(){return hotelsFound;}
 
-    public int getEnteredValue(){return Integer.parseInt(enteredValue.getText());}
+    public String getEnteredValue(){return enteredValue.getText();}
 
 }

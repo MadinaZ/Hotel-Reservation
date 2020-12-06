@@ -1,5 +1,10 @@
 package com.company.model;
 
+import com.company.view.View3;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +38,14 @@ public class User {
 //
 //    public int getAccountNumber() { return accountNumber; }
 
-    public void saveUser(){
-
+    public void saveUser(View3 view3) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter("UserDatabase.txt"));
+        bw.write(view3.getSignUpName());
+        bw.newLine();
+        bw.write(view3.getSignUpUsername());
+        bw.newLine();
+        bw.write(view3.getSignUpPassword());
+        bw.newLine();
+        bw.close();
     }
 }
