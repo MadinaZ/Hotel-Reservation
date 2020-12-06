@@ -14,6 +14,7 @@ public class View3 {
         private JFrame frame = new JFrame("Authentication");
         private JLabel headDescription, loginDescription, signUpDescription;
         private JTextField loginUsername = new JTextField("Username", 10);
+        private int hotelIndex;
 
         /**
          * gets user information to login to the account
@@ -27,9 +28,14 @@ public class View3 {
         /**
          * Constructor for View3
          */
-        public View3() {
+        public View3(int hotelIndex) {
                 initialize();
                 frame.setVisible(true);
+                this.hotelIndex = hotelIndex;
+        }
+
+        public View3() {
+
         }
 
         /**

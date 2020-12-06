@@ -78,16 +78,16 @@ public class View4 {
         reserveButton.setBounds(600, 50, 200, 25);
         reserveButton.addActionListener(new ActionListener() {
 
-                                           @Override
-                                           public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-                                               // TODO Auto-generated method stub
-                                               JOptionPane.showMessageDialog(frame, "Reservation is Confirmed!");
+                // TODO Auto-generated method stub
+                JOptionPane.showMessageDialog(frame, "Reservation is Confirmed!");
 
-                                               View view = new View();
-                                               frame.setVisible(false);
-                                           }
-                                       }
+                View view = new View();
+                frame.setVisible(false);
+            }
+        }
         );
         panel.add(reserveButton);
 

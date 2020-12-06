@@ -42,26 +42,6 @@ public class View2 {
         results.setEditable(false);
         results.setText("");
 
-        /**
-         * Action Listener for reserve button
-         */
-        reserveButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                // TODO Auto-generated method stub
-                for(int i = 0; i<hotelsFound; i++) {
-                    if(Integer.parseInt(enteredValue.getText()) == i) {
-                        View3 view3 = new View3();
-                    frame.setVisible(false);
-                    }
-                }
-            }
-        }
-
-        );
-
         String city = view.getCity();
         Date checkIn = view.getCheckIn();
         Date checkOut = view.getCheckOut();
@@ -105,7 +85,7 @@ public class View2 {
                 }
                 results.append("    Hotel Name   \t" + "Location    \t" + "Price   \t" + "Star   \t" + "Reviews" + "\n\n");
                 for (int i = 0; i < hotelsFound; i++) {
-                    results.append(i + 1 + ": " + hotelList.get(i).getHotel() + "\t" + hotelList.get(i).getLocation() + "\t"
+                    results.append(i + ": " + hotelList.get(i).getHotel() + "\t" + hotelList.get(i).getLocation() + "\t"
                             + hotelList.get(i).getPrice() + "\t" + hotelList.get(i).getStar() + "\t" + hotelList.get(i).getReview() + "\n");
                 }
 
@@ -120,5 +100,13 @@ public class View2 {
         frame.add(panel);
 
     }
+
+    public void reserveButtonListener(ActionListener reserveButtonL){
+        reserveButton.addActionListener(reserveButtonL);
+    }
+
+    public int getHotelsFound(){return hotelsFound;}
+
+    public int getEnteredValue(){return Integer.parseInt(enteredValue.getText());}
 
 }

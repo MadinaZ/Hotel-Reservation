@@ -1,10 +1,10 @@
 package com.company.controller;
 
-import com.company.model.Hotel;
 import com.company.model.Model;
 import com.company.model.User;
 import com.company.view.View;
 import com.company.view.View2;
+import com.company.view.View3;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,6 +17,7 @@ public class Controller {
     private View view;
     private User user;
     private Model model;
+    private View2 view2;
 
     /**
      *Constructor for Controller
@@ -28,6 +29,7 @@ public class Controller {
         this.view = view;
         this.user = user;
         this.model = model;
+//        this.view2 = view2;
 
         this.view.searchButtonListener(new searchButtonClick());
     }
@@ -39,7 +41,16 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             View2 view2 = new View2(model, view);
+            if(view2.getEnteredValue() != ""){
+                view2.reserveButtonListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        View3 view3 = new View3(view2.getEnteredValue());
+                    }
+                });
+            }
         }
     }
+
 
 }
