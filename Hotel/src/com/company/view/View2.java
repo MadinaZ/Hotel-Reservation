@@ -19,13 +19,28 @@ import java.util.List;
 public class View2 {
     JFrame frame = new JFrame();
     JPanel panel = new JPanel();
+    Date checkIn;
+    Date checkOut;
+    public int index;
 
     JTextArea results = new JTextArea(20, 6);
-    List<Hotel> hotelList = new ArrayList<>();
+    public List<Hotel> hotelList = new ArrayList<>();
     int hotelsFound = 0;
     JButton reserveButton = new JButton("Reserve");
 
     JTextField enteredValue = new JTextField("Enter Selected Hotel ID");
+
+    public List<Hotel> getHotelList() {
+        return hotelList;
+    }
+
+    public Date getCheckIn() {
+        return checkIn;
+    }
+
+    public Date getCheckOut() {
+        return checkOut;
+    }
 
     /**
      * Constructor for View2
@@ -43,8 +58,8 @@ public class View2 {
         results.setText("");
 
         String city = view.getCity();
-        Date checkIn = view.getCheckIn();
-        Date checkOut = view.getCheckOut();
+        checkIn = view.getCheckIn();
+        checkOut = view.getCheckOut();
         Date today = new Date();
 
         if(view.filtered){
@@ -81,6 +96,8 @@ public class View2 {
                             && checkIn.after(today)) {
                         hotelList.add(model.getHotels().get(i));
                         hotelsFound += 1;
+                        index = i;
+//                        System.out.println(i + " " + model.getHotels().get(i));
                     }
                 }
                 results.append("    Hotel Name   \t" + "Location    \t" + "Price   \t" + "Star   \t" + "Reviews" + "\n\n");
@@ -93,6 +110,7 @@ public class View2 {
                 ioException.printStackTrace();
             }
         }
+
 
         panel.add(results);
         panel.add(enteredValue);
@@ -108,5 +126,18 @@ public class View2 {
     public int getHotelsFound(){return hotelsFound;}
 
     public String getEnteredValue(){return enteredValue.getText();}
+
+    public String getHotelName(){
+//        for(int i = 0; i < hotelList.size(); i++){
+//            System.out.println(hotelList.get(i));
+//        }
+        int ind = Integer.parseInt(getEnteredValue());
+        return hotelList.get(ind).getHotel();
+//        System.out.println(hotelList.get(ind).getHotel());
+    }
+//
+//    public int getHotelPrice(){
+//        return getHotelList().get(1).getPrice(); //* (getCheckOut() - getCheckIn());
+//    }
 
 }

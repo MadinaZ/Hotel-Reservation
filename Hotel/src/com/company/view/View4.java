@@ -1,6 +1,9 @@
 package com.company.view;
 
+import com.company.model.User;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -14,20 +17,21 @@ import java.nio.file.Paths;
 public class View4 {
 
     private JFrame frame = new JFrame("Confirmation");
-    private JTextArea name, accountNumber, reservation;
+    private JTextArea name, accountNumber, hotel;
+    String hotelName;
+
+//    public String getHotelName() {
+//        return hotelName;
+//    }
 
     /**
      * View4 constructor
      */
-    public View4(){
-        initialize();
+    public View4(String hotelName){
+//        initialize();
         frame.setVisible(true);
-    }
+        this.hotelName = hotelName;
 
-    /**
-     * GUI for View4
-     */
-    public void initialize(){
         JPanel panel = new JPanel();
         panel.setBounds(0, 0, 1000, 300);
         panel.setLayout(null);
@@ -38,7 +42,6 @@ public class View4 {
 
         try {
             BufferedReader br = Files.newBufferedReader(Paths.get("UserDatabase.txt"));
-          //  StringBuffer stringBuffer = new StringBuffer();
 
             String line;
             line = br.readLine();
@@ -50,8 +53,7 @@ public class View4 {
             name.append(signUpName);
             br.close();
 
-
-                System.out.println(name);
+            System.out.println(name);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,6 +68,14 @@ public class View4 {
         accountNumber.setEditable(false);
         panel.add(accountNumber);
 
+        hotel = new JTextArea(" ");
+        hotel.setBounds(150, 150, 200, 20);
+        hotel.setEditable(false);
+
+//        hotel.setText("");
+        hotel.append(hotelName);
+        panel.add(hotel);
+
 //        reservation = new JTextArea("Reservation");
 //        reservation.setBounds(150, 150, 200, 20);
 //        reservation.setEditable(false);
@@ -77,16 +87,16 @@ public class View4 {
         reserveButton.setBounds(600, 50, 200, 25);
         reserveButton.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                                            @Override
+                                            public void actionPerformed(ActionEvent e) {
 
-                // TODO Auto-generated method stub
-                JOptionPane.showMessageDialog(frame, "Reservation is Confirmed!");
+                                                // TODO Auto-generated method stub
+                                                JOptionPane.showMessageDialog(frame, "Reservation is Confirmed!");
 
-                View view = new View();
-                frame.setVisible(false);
-            }
-        }
+                                                View view = new View();
+                                                frame.setVisible(false);
+                                            }
+                                        }
         );
         panel.add(reserveButton);
 
@@ -99,15 +109,15 @@ public class View4 {
          */
         cancelButton.addActionListener(new ActionListener() {
 
-                                            @Override
+                                           @Override
                                            public void actionPerformed(ActionEvent e) {
 
-                                                // TODO Auto-generated method stub
+                                               // TODO Auto-generated method stub
 
-                                                      View view = new View();
-                                                        frame.setVisible(false);
-                                                    }
-                                                }
+                                               View view = new View();
+                                               frame.setVisible(false);
+                                           }
+                                       }
         );
 
         frame.getContentPane().add(panel);
@@ -115,6 +125,13 @@ public class View4 {
         frame.setBounds(100, 100, 1000, 300);
         frame.getContentPane().setLayout(null);
     }
+
+    /**
+     * GUI for View4
+     */
+//    public void initialize(){
+//
+//    }
 
    // public void setName(String username){ name.setText(username); }
 
@@ -134,11 +151,11 @@ public class View4 {
         accountNumber.setText(Integer.toString(random_int));
     }
 
-    /**
-     * sets reservation number to a random number
-     */
-    public void setReservation(){
-        int reservation_int = (int)(Math.random() * (9999999 - 1000000 + 1) + 1000000);
-        reservation.setText(Integer.toString(reservation_int));
-    }
+//    /**
+//     * sets reservation number to a random number
+//     */
+//    public void setReservation(){
+//        int reservation_int = (int)(Math.random() * (9999999 - 1000000 + 1) + 1000000);
+//        reservation.setText(Integer.toString(reservation_int));
+//    }
 }

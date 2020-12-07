@@ -1,21 +1,29 @@
 package com.company.view;
 
+import com.company.model.Hotel;
+import com.company.model.Model;
 import com.company.model.User;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * View3 class displays login/signup page
  */
-public class View3 {
+public class View3 extends View2{
 
         private JFrame frame = new JFrame("Authentication");
         private JLabel headDescription, loginDescription, signUpDescription;
         private JTextField loginUsername = new JTextField("Username", 10);
-        private int hotelIndex;
-        User user = new User();
+//        private int hotelIndex;
+        public User user = new User(this);
+        JButton loginButton = new JButton("Login");
+        JButton signUpButton = new JButton("Sign-Up");
+//        public List<Hotel> hotelArrayList;
+        Model model;
+        View view;
 
         /**
          * gets user information to login to the account
@@ -29,14 +37,17 @@ public class View3 {
         /**
          * Constructor for View3
          */
-        public View3(String hotelIndex) {
+//        public View3(String hotelIndex, List<Hotel> hotelsList) {
+//                initialize();
+//                frame.setVisible(true);
+//                this.hotelIndex = Integer.parseInt(hotelIndex);
+//                this.hotelArrayList = hotelsList;
+//        }
+
+        public View3(Model model, View view) {
+                super(model, view);
                 initialize();
                 frame.setVisible(true);
-                this.hotelIndex = Integer.parseInt(hotelIndex);
-        }
-
-        public View3() {
-
         }
 
         /**
@@ -63,21 +74,7 @@ public class View3 {
                 loginPassword.setBounds(100, 130, 200, 25);
                 panel.add(loginPassword);
 
-                JButton loginButton = new JButton("Login");
                 loginButton.setBounds(100, 160, 100, 25);
-                loginButton.addActionListener(new ActionListener() {
-
-                                                      @Override
-                                                      public void actionPerformed(ActionEvent e) {
-
-                                                              // TODO Auto-generated method stub
-
-                                                              View4 view4 = new View4();
-                                                              frame.setVisible(false);
-                                                      }
-                                              }
-
-                );
 
                 panel.add(loginButton);
 
@@ -100,13 +97,12 @@ public class View3 {
 
                 panel.add(signUpPasswordConfirmation);
 
-                JButton signUpButton = new JButton("Sign-Up");
                 signUpButton.setBounds(500, 160, 100, 25);
                 signUpButton.addActionListener(e1 -> {
                         if ((getSignUpPasswordConfirmation().equalsIgnoreCase((getSignUpPassword())))) {
                                 try {
-                                        user.saveUser(this);
-                                        View3 view3 = new View3();
+                                        user.saveUser(new View3(model, view));
+                                        View3 view3 = new View3(model, view);
                                 } catch (Exception ex) {
                                         ex.printStackTrace();
                                 }
@@ -202,6 +198,10 @@ public class View3 {
          */
         public void setSignUpPasswordConfirmation(String password) {
                 signUpPasswordConfirmation.setText(password);
+        }
+
+        public void loginButtonListener(ActionListener loginButtonL){
+                loginButton.addActionListener(loginButtonL);
         }
 
 }

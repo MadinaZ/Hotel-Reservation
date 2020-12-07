@@ -5,29 +5,26 @@ import com.company.model.User;
 import com.company.view.View;
 import com.company.view.View2;
 import com.company.view.View3;
+import com.company.view.View4;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * Controller class
  */
 public class Controller {
     private View view;
-    private User user;
     private Model model;
-    private View2 view2;
 
     /**
      *Constructor for Controller
      * @param view sets View
-     * @param user sets User
      * @param model sets Model
      */
-    public Controller(View view, User user, Model model) {
+    public Controller(View view, Model model) {
         this.view = view;
-        this.user = user;
         this.model = model;
 //        this.view2 = view2;
 
@@ -45,7 +42,15 @@ public class Controller {
                 view2.reserveButtonListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        View3 view3 = new View3(view2.getEnteredValue());
+//                        View3 view3 = new View3(view2.getEnteredValue(), view2.hotelList);
+                        View3 view3 = new View3(model, view);
+                        view3.loginButtonListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                String selectedHotel = view2.getHotelName();
+                                View4 view4 = new View4(selectedHotel);
+                            }
+                        });
                     }
                 });
             }
