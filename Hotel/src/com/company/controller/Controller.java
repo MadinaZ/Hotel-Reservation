@@ -47,8 +47,9 @@ public class Controller {
                         view3.loginButtonListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
+                                int price = view2.getHotelPrice();
                                 String selectedHotel = view2.getHotelName();
-                                View4 view4 = new View4(selectedHotel);
+                                View4 view4 = new View4(selectedHotel, price);
                             }
                         });
                     }

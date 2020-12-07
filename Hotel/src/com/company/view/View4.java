@@ -19,15 +19,12 @@ public class View4 {
     private JFrame frame = new JFrame("Confirmation");
     private JTextArea name, accountNumber, hotel;
     String hotelName;
-
-//    public String getHotelName() {
-//        return hotelName;
-//    }
+    int price;
 
     /**
      * View4 constructor
      */
-    public View4(String hotelName){
+    public View4(String hotelName, int price){
 //        initialize();
         frame.setVisible(true);
         this.hotelName = hotelName;
@@ -91,7 +88,8 @@ public class View4 {
                                             public void actionPerformed(ActionEvent e) {
 
                                                 // TODO Auto-generated method stub
-                                                JOptionPane.showMessageDialog(frame, "Reservation is Confirmed!");
+                                                JOptionPane.showMessageDialog(frame, "Reservation is Confirmed!\n"
+                                                        + "Total amount: " + price + "$");
 
                                                 View view = new View();
                                                 frame.setVisible(false);
@@ -125,15 +123,6 @@ public class View4 {
         frame.setBounds(100, 100, 1000, 300);
         frame.getContentPane().setLayout(null);
     }
-
-    /**
-     * GUI for View4
-     */
-//    public void initialize(){
-//
-//    }
-
-   // public void setName(String username){ name.setText(username); }
 
     /**
      * setter for the name

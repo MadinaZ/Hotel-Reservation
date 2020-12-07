@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,7 @@ public class View2 {
     Date checkIn;
     Date checkOut;
     public int index;
+    int guests;
 
     JTextArea results = new JTextArea(20, 6);
     public List<Hotel> hotelList = new ArrayList<>();
@@ -60,6 +62,7 @@ public class View2 {
         String city = view.getCity();
         checkIn = view.getCheckIn();
         checkOut = view.getCheckOut();
+        guests = view.getGuests();
         Date today = new Date();
 
         if(view.filtered){
@@ -128,16 +131,14 @@ public class View2 {
     public String getEnteredValue(){return enteredValue.getText();}
 
     public String getHotelName(){
-//        for(int i = 0; i < hotelList.size(); i++){
-//            System.out.println(hotelList.get(i));
-//        }
         int ind = Integer.parseInt(getEnteredValue());
         return hotelList.get(ind).getHotel();
-//        System.out.println(hotelList.get(ind).getHotel());
     }
-//
-//    public int getHotelPrice(){
-//        return getHotelList().get(1).getPrice(); //* (getCheckOut() - getCheckIn());
-//    }
+
+    public int getHotelPrice(){
+        int ind = Integer.parseInt(getEnteredValue());
+        int diff = (int) (checkOut.getTime() - checkIn.getTime())/ (1000 * 60 * 60 * 24);
+        return hotelList.get(ind).getPrice() * diff * guests;
+    }
 
 }
