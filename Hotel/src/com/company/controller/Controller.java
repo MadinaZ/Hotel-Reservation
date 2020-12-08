@@ -26,8 +26,6 @@ public class Controller {
     public Controller(View view, Model model) {
         this.view = view;
         this.model = model;
-//        this.view2 = view2;
-
         this.view.searchButtonListener(new searchButtonClick());
     }
 
@@ -43,7 +41,7 @@ public class Controller {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 //                        View3 view3 = new View3(view2.getEnteredValue(), view2.hotelList);
-                        View3 view3 = new View3(model, view);
+                        View3 view3 = new View3();
                         view3.loginButtonListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {

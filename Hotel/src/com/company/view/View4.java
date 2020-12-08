@@ -1,9 +1,6 @@
 package com.company.view;
 
-import com.company.model.User;
-
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -18,6 +15,8 @@ public class View4 {
 
     private JFrame frame = new JFrame("Confirmation");
     private JTextArea name, accountNumber, hotel;
+    private JLabel nameLabel, accountNumberLabel, hotelLabel;
+
     String hotelName;
     int price;
 
@@ -34,6 +33,10 @@ public class View4 {
         panel.setLayout(null);
 
         // Left section : Name , Account Number, Reservation
+        nameLabel = new JLabel("Name:");
+        nameLabel.setBounds( 100, 50, 100, 20);
+        panel.add(nameLabel);
+
         name = new JTextArea(" ");
         name.setBounds(150, 50, 200, 20);
 
@@ -59,25 +62,26 @@ public class View4 {
         name.setEditable(false);
         panel.add(name);
 
+        accountNumberLabel = new JLabel("Account Number:");
+        accountNumberLabel.setBounds( 30, 100, 150, 20);
+        panel.add(accountNumberLabel);
+
         accountNumber = new JTextArea("Account Number");
         setAccountNumber();
         accountNumber.setBounds(150, 100, 200, 20);
         accountNumber.setEditable(false);
         panel.add(accountNumber);
 
+        hotelLabel = new JLabel("Selected Hotel:");
+        hotelLabel.setBounds( 45, 150, 150, 20);
+        panel.add(hotelLabel);
+
         hotel = new JTextArea(" ");
         hotel.setBounds(150, 150, 200, 20);
         hotel.setEditable(false);
 
-//        hotel.setText("");
         hotel.append(hotelName);
         panel.add(hotel);
-
-//        reservation = new JTextArea("Reservation");
-//        reservation.setBounds(150, 150, 200, 20);
-//        reservation.setEditable(false);
-//        panel.add(reservation);
-
 
         // Right Section : Reserve & Cancel Buttons
         JButton reserveButton = new JButton("Reserve");
@@ -131,7 +135,6 @@ public class View4 {
 
    }
     // Generates random int value from 1000000 - 9999999
-
     /**
      * generates random number for account number
      */
@@ -140,11 +143,4 @@ public class View4 {
         accountNumber.setText(Integer.toString(random_int));
     }
 
-//    /**
-//     * sets reservation number to a random number
-//     */
-//    public void setReservation(){
-//        int reservation_int = (int)(Math.random() * (9999999 - 1000000 + 1) + 1000000);
-//        reservation.setText(Integer.toString(reservation_int));
-//    }
 }

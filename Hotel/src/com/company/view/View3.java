@@ -1,18 +1,19 @@
 package com.company.view;
 
-import com.company.model.Hotel;
 import com.company.model.Model;
 import com.company.model.User;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * View3 class displays login/signup page
  */
-public class View3 extends View2{
+public class View3 {
 
         private JFrame frame = new JFrame("Authentication");
         private JLabel headDescription, loginDescription, signUpDescription;
@@ -21,7 +22,6 @@ public class View3 extends View2{
         public User user = new User(this);
         JButton loginButton = new JButton("Login");
         JButton signUpButton = new JButton("Sign-Up");
-//        public List<Hotel> hotelArrayList;
         Model model;
         View view;
 
@@ -44,8 +44,8 @@ public class View3 extends View2{
 //                this.hotelArrayList = hotelsList;
 //        }
 
-        public View3(Model model, View view) {
-                super(model, view);
+        public View3() {
+                //super(model, view);
                 initialize();
                 frame.setVisible(true);
         }
@@ -72,10 +72,53 @@ public class View3 extends View2{
                 panel.add(loginUsername);
 
                 loginPassword.setBounds(100, 130, 200, 25);
+                loginPassword.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                                loginPassword.setText(null);
+                        }
+                });
+                loginPassword.addFocusListener(new FocusListener() {
+                        @Override
+                        public void focusGained(FocusEvent focusEvent) {
+                                loginPassword.setText(null);
+                        }
+
+                        @Override
+                        public void focusLost(FocusEvent focusEvent) {
+                                // do nothing
+                        }
+                });
                 panel.add(loginPassword);
 
                 loginButton.setBounds(100, 160, 100, 25);
+                loginButton.addActionListener(e1 -> {
+                        String pwd = "";
+                        try {
+                                BufferedReader br = Files.newBufferedReader(Paths.get("UserDatabase.txt"));
 
+                                String line;
+                                line = br.readLine();
+                                line = br.readLine();
+                                line = br.readLine();
+                                pwd = line;
+                                System.out.println("PWD Passed: "+line);
+
+                        } catch (IOException e) {
+                                e.printStackTrace();
+                        }
+                        if ((getLoginPassword().equals((pwd)))) {
+                                try {
+                                        View4 view4 = new View4(View2.getHotelName(), View2.getHotelPrice());
+                                } catch (Exception ex) {
+                                        ex.printStackTrace();
+                                }
+
+                        } else {
+                                JOptionPane.showMessageDialog(frame, "Passwords do not match!");
+                        }
+
+                });
                 panel.add(loginButton);
 
                 // Sign-up Section
@@ -84,25 +127,96 @@ public class View3 extends View2{
                 panel.add(signUpDescription);
 
                 signUpName.setBounds(500, 100, 175, 25);
+                signUpName.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                                signUpName.setText(null);
+                        }
+                });
+                signUpName.addFocusListener(new FocusListener() {
+                        @Override
+                        public void focusGained(FocusEvent focusEvent) {
+                                signUpName.setText(null);
+                        }
 
+                        @Override
+                        public void focusLost(FocusEvent focusEvent) {
+                                // do nothing
+                        }
+                });
                 panel.add(signUpName);
 
+
                 signUpUsername.setBounds(500, 130, 175, 25);
+                signUpUsername.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                                signUpUsername.setText(null);
+                        }
+                });
+                signUpUsername.addFocusListener(new FocusListener() {
+                        @Override
+                        public void focusGained(FocusEvent focusEvent) {
+                                signUpUsername.setText(null);
+                        }
+
+                        @Override
+                        public void focusLost(FocusEvent focusEvent) {
+                                // do nothing
+                        }
+                });
                 panel.add(signUpUsername);
 
+
                 signUpPassword.setBounds(700, 100, 175, 25);
+                signUpPassword.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                                signUpPassword.setText(null);
+                        }
+                });
+                signUpPassword.addFocusListener(new FocusListener() {
+                        @Override
+                        public void focusGained(FocusEvent focusEvent) {
+                                signUpPassword.setText(null);
+                        }
+
+                        @Override
+                        public void focusLost(FocusEvent focusEvent) {
+                                // do nothing
+                        }
+                });
                 panel.add(signUpPassword);
 
                 signUpPasswordConfirmation.setBounds(700, 130, 175, 25);
+                signUpPasswordConfirmation.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                                signUpPasswordConfirmation.setText(null);
+                        }
+                });
+                signUpPasswordConfirmation.addFocusListener(new FocusListener() {
+                        @Override
+                        public void focusGained(FocusEvent focusEvent) {
+                                signUpPasswordConfirmation.setText(null);
+                        }
 
+                        @Override
+                        public void focusLost(FocusEvent focusEvent) {
+                                // do nothing
+                        }
+                });
                 panel.add(signUpPasswordConfirmation);
 
                 signUpButton.setBounds(500, 160, 100, 25);
                 signUpButton.addActionListener(e1 -> {
                         if ((getSignUpPasswordConfirmation().equalsIgnoreCase((getSignUpPassword())))) {
                                 try {
-                                        user.saveUser(new View3(model, view));
-                                        View3 view3 = new View3(model, view);
+                                        user.saveUser();
+
+                                        View3 view3 = new View3 ();
+                                        
+                                        frame.setVisible(false);
                                 } catch (Exception ex) {
                                         ex.printStackTrace();
                                 }
@@ -157,7 +271,7 @@ public class View3 extends View2{
          * @return String
          */
         public String getSignUpPassword() {
-                return signUpPassword.getText();
+                  return signUpPassword.getText();
         }
 
         /**
@@ -200,6 +314,10 @@ public class View3 extends View2{
                 signUpPasswordConfirmation.setText(password);
         }
 
+        /**
+         * listens for login button to be pressed
+         * @param loginButtonL
+         */
         public void loginButtonListener(ActionListener loginButtonL){
                 loginButton.addActionListener(loginButtonL);
         }
